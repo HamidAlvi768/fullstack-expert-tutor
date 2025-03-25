@@ -1,8 +1,6 @@
 <?php
 // Start session if not already started
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+
 use yii\helpers\Html;
 // Get the current page name to highlight active link
 $current_page = basename($_SERVER['PHP_SELF'], '.php');
@@ -36,6 +34,10 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
                         <a href="delivery.php" class="<?php echo $current_page === 'delivery' ? 'active' : ''; ?>">Delivery Work</a>
                         <a href="finance.php" class="<?php echo $current_page === 'finance' ? 'active' : ''; ?>">Manage Finance</a>
                         <a href="teacher-reviews.php" class="<?php echo $current_page === 'reviews' ? 'active' : ''; ?>">Reviews</a>
+                        <ul class="dropdown-menu" aria-labelledby="tutorDropdown">
+                            <li><a class="dropdown-item" href="<?= Yii::$app->urlManager->createUrl(['tutors']) ?>">Find a Tutor</a></li>
+                            <li><a class="dropdown-item" href="<?= Yii::$app->urlManager->createUrl(['post/create']) ?>">Request a Tutor</a></li>
+                        </ul>
                     </div>
 
                     <!-- Mobile-only user info -->

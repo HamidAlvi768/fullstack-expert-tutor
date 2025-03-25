@@ -40,9 +40,9 @@ use yii\helpers\Html;
                             Tutor
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="tutorDropdown">
-                            <li><a class="dropdown-item" href="#">Find a Tutor</a></li>
+                            <li><a class="dropdown-item" href="<?= Yii::$app->urlManager->createUrl(['tutors']) ?>">Find a Tutor</a></li>
                             <li><a class="dropdown-item" href="teacher-profile-wizard.php">Become a Tutor</a></li>
-                            <li><a class="dropdown-item" href="request-tutor.php">Request a Tutor</a></li>
+                            <li><a class="dropdown-item" href="<?= Yii::$app->urlManager->createUrl(['post/create']) ?>">Request a Tutor</a></li>
                         </ul>
                     </li>
                 </ul>

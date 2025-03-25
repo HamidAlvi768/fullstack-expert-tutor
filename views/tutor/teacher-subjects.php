@@ -82,7 +82,7 @@ echo Html::jsFile(Yii::getAlias('@web') . '/assets/js/profile-nav.js');
                 </div>
 
                 <div class="form-group text-center mt-4">
-                    <?= Html::submitButton('Save', ['class' => 'btn btn-success profile-btn-save']) ?>
+                    <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
                 </div>
 
                 <?php ActiveForm::end(); ?>

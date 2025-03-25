@@ -150,10 +150,6 @@ class SiteController extends Controller
     {
         $this->layout = "login_layout";
 
-        // if (!Yii::$app->user->isGuest) {
-        //     return $this->redirect(['profile/create']);
-        // }
-
         $usersCount = User::find()->count();
         if ($usersCount == 0) {
             // Add roles
@@ -169,6 +165,19 @@ class SiteController extends Controller
             if ($model->load($postData)) {
                 $loginResult = $model->login();
                 if ($loginResult) {
+                    $user = Yii::$app->user->identity;
+
+                    if ($user->role === 'student') {
+                        $profile = $user->profiles;
+                        if ($profile === null) {
+                            return $this->redirect(['profile/create']);
+                        } else {
+                            return $this->redirect(['post/list']);
+                        }
+                    } elseif ($user->role === 'tutor') {
+                        return $this->redirect(['tutor/teacher-profile']);
+                    }
+
                     return $this->goHome();
                 }
             }
@@ -261,7 +270,14 @@ class SiteController extends Controller
                 $user->verification = 1;
                 $user->save();
                 Yii::$app->user->login($user);
-                return $this->goHome();
+                if ($user->role === 'student') {
+                 
+                        return $this->redirect(['profile/create']); 
+                       
+                } elseif ($user->role === 'tutor') {
+                    return $this->redirect(['tutor/teacher-profile']);
+                }
+                // return $this->goHome();
             }
         } else {
             echo 'no link found';

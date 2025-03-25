@@ -200,7 +200,7 @@ class TutorController extends Controller
 
         $model = TeacherSubjects::find()->where(['teacher_id' => $id])->one();
         if ($model) {
-            return $this->redirect(['/tutor/education']);
+            return $this->redirect(['/tutor/education-experience']);
         }
 
         $model = new TeacherSubjects();
@@ -212,6 +212,7 @@ class TutorController extends Controller
             $to_level = $data['to_level'];
 
             if (count($subject) > 0) {
+                // var_dump($subject);exit();
 
                 for ($i = 0; $i < count($subject); $i++) {
                     $teacherSubject = new TeacherSubjects();
@@ -221,8 +222,9 @@ class TutorController extends Controller
                     $teacherSubject->to_level = $to_level[$i];
                     $saved = $teacherSubject->save();
                 }
-                return $this->redirect(['education-experience', 'id' => $model->id]);
+                return $this->redirect(['/tutor/education-experience', 'id' => $model->id]);
             }
+            // var_dump('pass');exit();
         }
 
         return $this->render('teacher-subjects', [

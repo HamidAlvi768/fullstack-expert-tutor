@@ -31,7 +31,7 @@ echo Html::cssFile(Yii::getAlias('@web') . '/assets/css/request-tutor.css');
                     <div class="col-md-6">
                         <?= $form->field($model, 'phone_number')->textInput([
                             'maxlength' => 100,
-                            'readonly' => true,
+                            // 'readonly' => true,
                             'value' => Profiles::find()->where(['user_id' => Yii::$app->user->identity->id])->one()->phone_number ?? ""
                         ]); ?>
                     </div>

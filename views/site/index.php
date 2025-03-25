@@ -59,28 +59,28 @@ require_once 'includes/components/review-card.php';
 
 $reviews = [
     [
-        'assetsimages/reviewers/guy-hawkins.png',
+        'assets/images/reviewers/guy-hawkins.png',
         'Guy Hawkins',
         '1 week ago',
         5,
         'I appreciate the precise short videos (10 mins or less each) because overly long videos tend to make me lose focus. The instructor is very knowledgeable in Web Design and it shows as he shares his knowledge. These were my best 6 months of training. Thanks, Vako.'
     ],
     [
-        'assetsimages/reviewers/bessie-cooper.png',
+        'assets/images/reviewers/bessie-cooper.png',
         'Bessie Cooper',
         '6 hours ago',
         5,
         'Webflow course was good, it covers design secrets, and to build responsive web pages, blog, and some more tricks and tips about webflow. I enjoyed the course and it helped me to add web development skills related to webflow in my toolbox. Thank you Vako.'
     ],
     [
-        'assetsimages/reviewers/dianne-russell.png',
+        'assets/images/reviewers/dianne-russell.png',
         'Dianne Russell',
         '51 mins ago',
         5,
         'This course is just amazing! has great course content, the best practices, and a lot of real-world knowledge. I love the way of giving examples, the best tips by the instructor which are pretty interesting, fun and knowledgable and I was never getting bored throughout the course.'
     ],
     [
-        'assetsimages/reviewers/eleanor-pena.png',
+        'assets/images/reviewers/eleanor-pena.png',
         'Eleanor Pena',
         '1 days ago',
         5,

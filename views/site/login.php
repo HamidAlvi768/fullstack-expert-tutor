@@ -24,17 +24,22 @@
     <div class="page-wrapper">
 
         <style>
+            .page-wrapper {
+                background-color: #f5f5f5;
+                min-height: 100vh;
+            }
+
             .login-page {
                 width: 100%;
+                min-height: 100vh;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                background-color: #aeaeae99;
-                padding: 45px;
             }
 
             .login-form-panel {
                 border-radius: 0px 15px 15px 0px;
+                background: #fff;
             }
 
             .login-image-panel {
@@ -70,75 +75,80 @@ use yii\bootstrap5\Html;
         $alternateLink = 'Sign up';
         $alternateLinkTarget = '#signupModal';
         ?>
-        <div class="login-page">
-            <div class="row g-0" style="overflow: hidden;">
-                <!-- Left Image Panel -->
-                <div class="col-md-6 d-none d-md-block">
-                    <div class="login-image-panel" style="border-radius: 15px 0px 0px 15px;overflow:hidden">
-                        <img src="<?= Yii::getAlias('@web') ?>/assets/images/student-login.jpg"
-                            alt="Login illustration"
-                            class="img-fluid h-100 w-100 object-fit-cover"
-                            style="height: 100%;"
-                            id="auth-image">
-                    </div>
-                </div>
-                <!-- Right Form Panel -->
-                <div class="col-md-6">
-                    <div class="login-form-panel p-4 p-md-5">
-
-                        <h2 class="login-title mb-4"><?php echo $title; ?></h2>
-
-                        <!-- Auth Method Tabs -->
-                        <div class="login-method-tabs mb-4">
-                            <button class="btn active" data-method="email">E-mail</button>
-                            <button class="btn" data-method="mobile">Mobile Number</button>
+        <div class="login-page modal-dialog">
+            <div class="modal-content">
+                <div class="row g-0" style="overflow: hidden; height: 30rem;">
+                    <!-- Left Image Panel -->
+                    <div class="col-md-6 d-none d-md-block">
+                        <div class="login-image-panel" style="border-radius: 15px 0px 0px 15px;">
+                            <img src="<?= Yii::getAlias('@web') ?>/assets/images/student-login.jpg"
+                                alt="Login illustration"
+                                class="img-fluid h-100 w-100 object-fit-cover"
+                                style="height: 100%;"
+                                id="auth-image">
                         </div>
+                    </div>
+                    <!-- Right Form Panel -->
+                    <div class="col-md-6">
+                        <div class="login-form-panel p-4 p-md-5">
+                            <h2 class="login-title mb-4"><?php echo $title; ?></h2>
 
-                        <!-- Auth Form -->
-                       
+                            <!-- Auth Method Tabs -->
+                            <div class="login-method-tabs mb-4">
+                                <button class="btn active" data-method="email">E-mail</button>
+                                <button class="btn" data-method="mobile">Mobile Number</button>
+                            </div>
+
+                            <!-- Auth Form -->
                            
-                        <?php $form = ActiveForm::begin([
-            'id' => 'login-form',
-            'fieldConfig' => [
-                'template' => "{label}\n{input}\n{error}",
-                'labelOptions' => ['class' => 'form-label'],
-                'inputOptions' => ['class' => 'form-control'],
-                'errorOptions' => ['class' => 'invalid-feedback'],
-            ],
-        ]); ?>
+                               
+                            <?php $form = ActiveForm::begin([
+                'id' => 'login-form',
+                'fieldConfig' => [
+                    'template' => "{label}\n<div class=\"input-group\">\n<span class=\"input-group-text\"><i class=\"fas {fa_icon}\"></i></span>\n{input}\n</div>\n{error}",
+                    'labelOptions' => ['class' => 'form-label'],
+                    'inputOptions' => ['class' => 'form-control'],
+                    'errorOptions' => ['class' => 'invalid-feedback'],
+                ],
+                'options' => ['class' => 'auth-form'],
+            ]); ?>
 
-                            <!-- Email Input Group -->
-                            <div class="form-group mb-3" id="email-input-group">
-                                <div class="input-group">
-                                    <span class="input-group-text">
-                                        <i class="fas fa-envelope"></i>
-                                    </span>
-                                    <?= $form->field($model, 'email')->textInput(['autofocus' => true, 'placeholder' => 'Enter your username']) ?>
+                                <!-- Email Input Group -->
+                                <div class="form-group mb-3" id="email-input-group">
+                                    <?= $form->field($model, 'email', [
+                                        'options' => ['class' => false],
+                                        'inputOptions' => ['placeholder' => 'Enter your username', 'autofocus' => true],
+                                        'parts' => [
+                                            '{fa_icon}' => 'fa-envelope'
+                                        ]
+                                    ])->textInput() ?>
                                 </div>
-                            </div>
 
-                            <div class="form-group mb-3">
-                                <div class="input-group">
-                                    <span class="input-group-text">
-                                        <i class="fas fa-lock"></i>
-                                    </span>
-                                    <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Enter your password']) ?>
+                                <!-- Password Input Group -->
+                                <div class="form-group mb-3">
+                                    <?= $form->field($model, 'password', [
+                                        'options' => ['class' => false],
+                                        'inputOptions' => ['placeholder' => 'Enter your password'],
+                                        'parts' => [
+                                            '{fa_icon}' => 'fa-lock'
+                                        ]
+                                    ])->passwordInput() ?>
                                 </div>
-                            </div>
 
-                            <?php if ($isLogin): ?>
-                                <div class="text-end mb-3">
-                                    <a href="#" class="forgot-password">Forgot password?</a>
+                                <?php if ($isLogin): ?>
+                                    <div class="text-end mb-3">
+                                        <a href="#" class="forgot-password">Forgot password?</a>
+                                    </div>
+                                <?php endif; ?>
+
+                                <div class="form-group">
+                                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary w-100']) ?>
                                 </div>
-                            <?php endif; ?>
 
-                            <div class="form-group">
-            <?= Html::submitButton('Login', ['class' => 'btn btn-primary login-btn']) ?>
-        </div>
+                            <?php ActiveForm::end(); ?>
 
-        <?php ActiveForm::end(); ?>
                             <!-- Social Login -->
-                            <div class="social-login text-center">
+                            <div class="social-login text-center mt-4">
                                 <p class="text-muted mb-3">Sign in With</p>
                                 <div class="social-icons mb-4">
                                     <button class="btn btn-social facebook" type="button">
@@ -158,7 +168,7 @@ use yii\bootstrap5\Html;
                                     </a>
                                 </p>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>

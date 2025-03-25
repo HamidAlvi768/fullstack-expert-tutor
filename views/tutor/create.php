@@ -51,7 +51,7 @@ $countries = [
     'CG' => 'Congo - Brazzaville',
     'CD' => 'Congo - Kinshasa',
     'CR' => 'Costa Rica',
-    'CI' => 'Côte d’Ivoire',
+    'CI' => 'Côte d\'Ivoire', // Escaped single quote to fix syntax error
     'HR' => 'Croatia',
     'CU' => 'Cuba',
     'CY' => 'Cyprus',
@@ -163,79 +163,196 @@ $countries = [
 
 ?>
 
+<style>
+.parent-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1320px;
+    margin: 0 auto;
+}
 
+.profile-content {
+    flex: 1;
+}
+
+.wizard-section-title {
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.profile-photo-upload {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile-photo-placeholder {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #f8f9fa;
+    margin: 0 auto 15px;
+    cursor: pointer;
+    overflow: hidden;
+    border: 2px solid #e9ecef;
+}
+
+.profile-photo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.upload-your-photo {
+    color: #6c757d;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.wizard-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.wizard-form-group {
+    margin-bottom: 20px;
+}
+
+.wizard-form-control {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.wizard-select-control {
+    height: 45px;
+}
+
+.subject-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #495057;
+    font-weight: 500;
+}
+
+.form-actions {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.btn-save {
+    background: #6366F1;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-save:hover {
+    background: #4F46E5;
+}
+</style>
 
 <body class="profile-page">
-    <div class="profile-main-content">
-        <div class="container">
-            <h1><?= Html::encode($this->title) ?></h1>
-            <div class="profiles-form">
-                <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <div class="parent-container">
+        <?php echo $this->render('_sidebar'); ?>
+        
+        <div class="profile-content">
+            <div class="container">
 
-                <?= $form->field($model, 'avatarFile')->fileInput(['required' => false]) ?>
-                <div class="row">
-                    <div class="col-md-6">
-                        <?= $form->field($model, 'full_name')->textInput(['maxlength' => 100, 'required' => true]) ?>
+                <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data', 'class' => 'profile-form-container']]); ?>
+
+                <!-- Profile Photo Upload -->
+                <div class="profile-photo-upload">
+                    <div class="profile-photo-placeholder" id="profile-photo-container">
+                        <img src="<?= Yii::getAlias('@web') ?>/assets/images/profiles/teacher-avatar.jpg" alt="Profile Photo" id="profile-preview">
+                        <?= $form->field($model, 'avatarFile')->fileInput([
+                            'hidden' => true,
+                            'id' => 'profile-upload',
+                            'onchange' => 'readURL(this);'
+                        ])->label(false) ?>
                     </div>
-                    <div class="col-md-6">
-                        <?= $form->field($model, 'nick_name')->textInput(['maxlength' => 100, 'required' => true]) ?>
-                    </div>
+                    <div class="upload-your-photo">Upload Your Photo</div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-6">
+                <!-- Form Fields -->
+                <div class="wizard-form-grid">
+                    <div class="wizard-form-group">
+                        <?= $form->field($model, 'full_name')->textInput([
+                            'class' => 'wizard-form-control',
+                            'placeholder' => 'Full Name'
+                        ])->label('Full Name', ['class' => 'subject-label']) ?>
+                    </div>
+
+                    <div class="wizard-form-group">
+                        <?= $form->field($model, 'nick_name')->textInput([
+                            'class' => 'wizard-form-control',
+                            'placeholder' => 'Nick Name'
+                        ])->label('Nick Name', ['class' => 'subject-label']) ?>
+                    </div>
+
+                    <div class="wizard-form-group">
                         <?= $form->field($model, 'gender')->dropDownList([
                             'male' => 'Male',
                             'female' => 'Female'
-                        ], ['prompt' => 'Select Gender', 'required' => true]) ?>
+                        ], [
+                            'prompt' => 'Select Gender',
+                            'class' => 'wizard-form-control wizard-select-control'
+                        ])->label('Gender', ['class' => 'subject-label']) ?>
                     </div>
-                    <div class="col-md-6">
+
+                    <div class="wizard-form-group">
                         <?= $form->field($model, 'country')->dropDownList(
                             $countries,
-                            ['prompt' => 'Select Your Country', 'class' => 'form-control', 'id' => 'country']
-                        ) ?>
+                            [
+                                'prompt' => 'Select Your Country',
+                                'class' => 'wizard-form-control wizard-select-control'
+                            ]
+                        )->label('Country', ['class' => 'subject-label']) ?>
                     </div>
-                </div>
-                <div class="row">
-                <div class="col-md-6">
 
-<?= $form->field($model, 'languages')->textInput(['maxlength' => 100, 'required' => true, 'class' => 'form-control', 'placeholder' => 'Your Language', 'id' => 'language']) ?>
-</div>
-                    <div class="col-md-6">
+                    <div class="wizard-form-group">
+                        <?= $form->field($model, 'languages')->textInput([
+                            'class' => 'wizard-form-control',
+                            'placeholder' => 'Your Language'
+                        ])->label('Language', ['class' => 'subject-label']) ?>
+                    </div>
+
+                    <div class="wizard-form-group">
                         <?= $form->field($model, 'timezone')->dropDownList(
                             ArrayHelper::map(
                                 DateTimeZone::listIdentifiers(DateTimeZone::ALL),
-                                function ($timezone) {
-                                    return $timezone;
-                                },
+                                function ($timezone) { return $timezone; },
                                 function ($timezone) {
                                     $dateTime = new DateTime('now', new DateTimeZone($timezone));
                                     $offset = $dateTime->format('P');
-                                    $tzInfo = new DateTimeZone($timezone);
-                                    $transitions = $tzInfo->getTransitions(time(), time() + 31536000);
-                                    $hasDst = count($transitions) > 1;
-                                    $label = "(UTC/GMT{$offset}";
-                                    if ($hasDst) {
-                                        $label .= "†";
-                                    }
-                                    $label .= ") " . str_replace('_', ' ', $timezone);
-                                    return $label;
+                                    return "(UTC/GMT{$offset}) " . str_replace('_', ' ', $timezone);
                                 }
                             ),
                             [
                                 'prompt' => 'Select Timezone',
-                                'required' => true,
-                                'options' => [
-                                    'style' => 'max-width: 100%;'
-                                ]
+                                'class' => 'wizard-form-control wizard-select-control'
                             ]
-                        ) ?>
+                        )->label('Timezone', ['class' => 'subject-label']) ?>
+                    </div>
+
+                    <div class="wizard-form-group">
+                        <?= $form->field($model, 'phone_number')->textInput([
+                            'class' => 'wizard-form-control',
+                            'placeholder' => 'Phone Number'
+                        ])->label('Phone Number', ['class' => 'subject-label']) ?>
                     </div>
                 </div>
 
-                <?= $form->field($model, 'phone_number')->textInput(['maxlength' => 20, 'required' => true]) ?>
-                <div class="form-group">
-                    <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+                <div class="form-actions">
+                    <?= Html::submitButton('Save', ['class' => 'btn-save']) ?>
                 </div>
 
                 <?php ActiveForm::end(); ?>
@@ -243,3 +360,23 @@ $countries = [
         </div>
     </div>
 </body>
+
+<script>
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function(e) {
+            $('#profile-preview').attr('src', e.target.result);
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$(document).ready(function() {
+    $('#profile-photo-container').click(function() {
+        $('#profile-upload').click();
+    });
+});
+</script>

@@ -52,15 +52,14 @@ $logo_alt = isset($custom_logo_alt) ? $custom_logo_alt : 'Assignment Connect';
                 <!-- Login Button -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        
                         <?php if (Yii::$app->user->isGuest): ?>
-                    <a href="<?= Yii::$app->urlManager->createUrl(['site/login']) ?>" class="btn btn-primary w-100">Sign In</a>
+                    <a href="<?= Yii::$app->urlManager->createUrl(['site/login']) ?>" class="btn nav-login-btn">Sign In</a>
                 <?php else: ?>
                     <?php
                         echo Html::beginForm(['/logout'], 'post');
                         echo Html::submitButton(
                             'Logout',
-                            ['class' => 'btn btn-primary w-100 logout']
+                            ['class' => 'btn nav-login-btn logout']
                         );
                         echo Html::endForm();
                         ?>
@@ -80,5 +79,17 @@ $logo_alt = isset($custom_logo_alt) ? $custom_logo_alt : 'Assignment Connect';
             margin-top: 1rem;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+    }
+    .nav-login-btn {
+        background: #564FFD;
+        border: none;
+        padding: 12px 55px;
+        font-weight: 500;
+        border-radius: 8px;
+        color: white;
+    }
+    .nav-login-btn:hover {
+        background: #4540e5;
+        color: white;
     }
 </style>

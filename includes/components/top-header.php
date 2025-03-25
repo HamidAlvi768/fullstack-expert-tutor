@@ -3,6 +3,19 @@
 
 use yii\helpers\Html;
 ?>
+<style>
+    .btn-link.logout {
+        text-decoration: none;
+        border: none;
+        background: none;
+        padding: 8px 0;
+        color: var(--text-dark);
+    }
+
+    .btn-link.logout:hover {
+        color: var(--primary-color);
+    }
+</style>
 <!-- Top Header -->
 <header class="profile-top-header">
     <div class="profile-container">

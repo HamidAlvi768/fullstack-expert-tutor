@@ -10,6 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Profiles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 // echo Html::cssFile(Yii::getAlias('@web') . '/assets/css/tutor-hero.css');
 echo Html::cssFile(Yii::getAlias('@web') . '/assets/css/components/tutor-hero.css');
+echo Html::cssFile(Yii::getAlias('@web') . '/assets/css/components/jobs.css');
 
 $firstName = isset($user->username) ? explode(' ', $user->username)[0] : 'Bryan';
 $lastName = isset($user->username) && strpos($user->username, ' ') !== false 
@@ -89,10 +90,14 @@ if (isset($props['profile']['full_name']) && !isset($props['profile']['first_nam
         }
         .tutor-name{
             text-align: center;
+            width: auto;
+            display: flex;
+            flex-wrap: wrap;
         }
         .tutor-info{
             display: flex;
             justify-content: center;
+            flex-direction: column;
         }
         .tutor-profile-section{
             margin-top: 1.5rem;
@@ -189,15 +194,18 @@ if (isset($props['profile']['full_name']) && !isset($props['profile']['first_nam
                     <div class="job-header">
                         <h2 class="job-title"><?= Html::encode($model->title) ?></h2>
                         <div class="job-amount">
-                            <span style="margin-right: 0.4rem;">Amount: </span>
+                            <span class="amount-currency">PKR</span>
                             <span class="amount-value"><?= Html::encode($model->budget) ?></span>
-                            <span class="amount-currency">$</span>
                         </div>
                     </div>
                     <p class="job-description"><?= Html::encode(substr($model->details, 0, 150)) . '...' ?></p>
-                    <?= Html::a(JobApplications::find()->where(['job_id'=>$model->id,'applicant_id'=>Yii::$app->user->identity->id])->one()?'Applied':'Apply', ['job-apply', 'id' => $model->id], ['class' => 'btn btn-success btn-sm ml-2']) ?>
+                    <?= Html::a(
+                        JobApplications::find()->where(['job_id'=>$model->id,'applicant_id'=>Yii::$app->user->identity->id])->one() ? 'Applied' : 'Apply', 
+                        ['job-apply', 'id' => $model->id], 
+                        ['class' => 'btn-apply']
+                    ) ?>
                 </div>
             </div>
-            <?php endforeach; ?>
+        <?php endforeach; ?>
         </div>
     </section>

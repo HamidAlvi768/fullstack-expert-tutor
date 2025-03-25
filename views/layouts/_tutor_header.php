@@ -98,6 +98,20 @@ use yii\helpers\Html;
         margin-left: 20px;
         border-radius: 11px;
     }
+
+    .btn-link.logout {
+        text-decoration: none;
+        border: none;
+        background: none;
+        padding: 12px 16px;
+        width: 100%;
+        text-align: left;
+        color: #333;
+    }
+
+    .btn-link.logout:hover {
+        background-color: #f1f1f1;
+    }
 </style>
 <header class="header">
     <nav class="nav">

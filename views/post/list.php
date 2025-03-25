@@ -51,19 +51,34 @@ echo Html::cssFile(Yii::getAlias('@web') . '/assets/css/profile.css');
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         padding: 25px;
         margin-bottom: 20px;
+        width: -webkit-fill-available;
+    }
+
+    .expertTutor_myRequests_card .request-message {
+        text-decoration: none;
+        color: #09B31A !important;
+    }
+
+    .expertTutor_myRequests_card a {
+        text-decoration: none;
+    }
+
+    .expertTutor_myRequests_card .card-title {
+        font-size: 2rem;
+        font-weight: 600;
     }
 
     .expertTutor_myRequests_price {
         font-weight: 600;
         font-size: 1.25rem;
         margin-right: 15px;
-        margin-top: -0.7rem;
     }
 
     .expertTutor_myRequests_currency {
         display: inline-flex;
         align-items: center;
         margin-right: 4px;
+        color: #564FFD;
     }
 
     .expertTutor_myRequests_currency svg {
@@ -123,6 +138,7 @@ echo Html::cssFile(Yii::getAlias('@web') . '/assets/css/profile.css');
         border-radius: 8px;
         font-weight: 500;
         transition: all 0.2s;
+        text-decoration: none;
     }
 
     .expertTutor_myRequests_verifyButton:hover {
@@ -246,6 +262,10 @@ echo Html::cssFile(Yii::getAlias('@web') . '/assets/css/profile.css');
     .change-phone-link:hover {
         text-decoration: underline;
     }
+
+    .page-title-section {
+        display: none !important;
+    }
 </style>
 
 <body class="no-bg">
@@ -273,7 +293,7 @@ echo Html::cssFile(Yii::getAlias('@web') . '/assets/css/profile.css');
         <?php endif; ?>
 
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-4 page-title-section">
             <h2 class="mb-0"><?= Html::encode($this->title) ?></h2>
             <?php if ($isNumberVerified): ?>
                 <div>
@@ -291,8 +311,8 @@ echo Html::cssFile(Yii::getAlias('@web') . '/assets/css/profile.css');
                 <div class="" style="display: flex;justify-content:space-between;">
                     <h5 class="card-title"><?= Html::encode($model->title) ?></h5>
                     <a href="<?php echo Helper::baseUrl("/post/engagements?id={$model->id}"); ?>">
-                        <span><i class="fa fa-envelope"></i></span>
-                        <span style=""><?php echo count($model->getMessages()->all());  ?></span>
+                        <span><i class="far fa-envelope request-message"></i></span>
+                        <span style="font-size: 0.8rem;"><?php echo count($model->getMessages()->all());  ?></span>
                     </a>
                 </div>
 

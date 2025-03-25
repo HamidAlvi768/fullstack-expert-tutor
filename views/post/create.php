@@ -4,7 +4,7 @@ use app\models\Profiles;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Create Student Job Post';
+$this->title = 'Request a Tutor';
 $this->params['breadcrumbs'][] = ['label' => 'Student Job Posts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -23,7 +23,7 @@ echo Html::cssFile(Yii::getAlias('@web') . '/assets/css/request-tutor.css');
 
                 <?= $form->field($model, 'title')->textInput(['maxlength' => 255, 'required' => true]) ?>
 
-                <?= $form->field($model, 'details')->textarea(['rows' => 6, 'required' => true]) ?>
+                <?= $form->field($model, 'details')->textarea(['rows' => 6, 'required' => true,'class' => 'request-tutor-textarea']) ?>
                 <div class="row">
                     <div class="col-md-6">
                         <?= $form->field($model, 'location')->textInput(['maxlength' => 100, 'required' => true]) ?>
@@ -51,7 +51,7 @@ echo Html::cssFile(Yii::getAlias('@web') . '/assets/css/request-tutor.css');
                             'online' => 'Online',
                             'in-person' => 'In Person',
                             'both' => 'Both'
-                        ], ['prompt' => 'Select Meeting Option']) ?>
+                        ], ['prompt' => 'Select Meeting Option', 'class' => 'form-select']) ?>
                     </div>
                 </div>
 
@@ -68,8 +68,7 @@ echo Html::cssFile(Yii::getAlias('@web') . '/assets/css/request-tutor.css');
                     <div class="col-md-6">
                         <?= $form->field($model, 'gender')->dropDownList([
                             'male' => 'Male',
-                            'female' => 'Female',
-                            'any' => 'Any'
+                            'female' => 'Female'
                         ], ['prompt' => 'Select Gender']) ?>
                     </div>
                     <div class="col-md-6">

@@ -23,6 +23,10 @@ echo Html::cssFile(Yii::getAlias('@web') . '/assets/css/profile.css');
             opacity: 0 !important;
         }
 
+        h1:not(.expertTutor_jobDetail_title) {
+            display: none;
+        }
+
         .expertTutor_jobDetail_container {
             max-width: 1400px;
             margin: 0 auto;
@@ -30,6 +34,7 @@ echo Html::cssFile(Yii::getAlias('@web') . '/assets/css/profile.css');
             background: white;
             border-radius: 16px;
             margin-bottom: 5rem;
+            width: -webkit-fill-available;
         }
 
         .expertTutor_jobDetail_layout {
@@ -181,9 +186,9 @@ echo Html::cssFile(Yii::getAlias('@web') . '/assets/css/profile.css');
 
         .expertTutor_jobDetail_meta {
             display: flex;
-            justify-content: space-between;
             align-items: center;
             margin-bottom: 0;
+            gap: 1rem;
         }
 
         .expertTutor_jobDetail_price {
@@ -313,6 +318,7 @@ echo Html::cssFile(Yii::getAlias('@web') . '/assets/css/profile.css');
             transition: all 0.2s ease-in-out;
             box-shadow: 0 2px 4px rgba(0, 171, 85, 0.08);
             justify-content: space-between;
+            text-decoration: none;
         }
 
         .expertTutor_dashboard_createPost:hover {

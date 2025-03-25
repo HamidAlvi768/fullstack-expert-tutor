@@ -197,7 +197,7 @@ echo Html::cssFile(Yii::getAlias('@web') . '/assets/css/profile.css');
             display: flex;
             justify-content: center;
             gap: 12px;
-            margin-bottom: 28px;
+            margin-bottom: 10px;
         }
 
         .code-input {
@@ -241,6 +241,13 @@ echo Html::cssFile(Yii::getAlias('@web') . '/assets/css/profile.css');
         .resend-link:hover, .change-phone-link:hover {
             text-decoration: underline;
         }
+
+        .verification-container {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 
 
@@ -275,7 +282,7 @@ echo Html::cssFile(Yii::getAlias('@web') . '/assets/css/profile.css');
                 <?php endfor; ?>
             </div>
 
-            <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Verify</button>
+            <button type="submit" class="btn btn-primary" style="margin: 10px;">Verify</button>
             <?php \yii\widgets\ActiveForm::end(); ?>
             
             <div class="verification-help">

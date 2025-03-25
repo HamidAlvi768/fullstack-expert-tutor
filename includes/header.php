@@ -18,7 +18,7 @@ use yii\helpers\Html;
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!-- Collapsible Navbar Content -->
-            <div class="collapse navbar-collapse" id="navbarMain" style="background: white;">
+            <div class="collapse navbar-collapse" id="navbarMain">
                 <!-- Main Navigation Links -->
                 <ul class="navbar-nav" style="margin-left:4rem;">
                     <li class="nav-item">

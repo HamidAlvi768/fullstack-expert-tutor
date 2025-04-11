@@ -1,11 +1,9 @@
 <?php
 // Start session if not already started
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+
 
 // Store the current step in session
-$_SESSION['current_wizard_step'] = 'description';
+// $_SESSION['current_wizard_step'] = 'description';
 ?>
 
 <h2 class="wizard-section-title">Description</h2>

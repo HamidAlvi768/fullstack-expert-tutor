@@ -43,7 +43,7 @@
             }
 
             .login-image-panel {
-                height: 600px;
+                height: 100%;
                 overflow: hidden;
             }
 
@@ -77,7 +77,7 @@ use yii\bootstrap5\Html;
         ?>
         <div class="login-page modal-dialog">
             <div class="modal-content">
-                <div class="row g-0" style="overflow: hidden; height: 30rem;">
+                <div class="row g-0" style="overflow: hidden;">
                     <!-- Left Image Panel -->
                     <div class="col-md-6 d-none d-md-block">
                         <div class="login-image-panel" style="border-radius: 15px 0px 0px 15px;">
